@@ -85,6 +85,9 @@ var itemlistApp = new Vue({
   },
   methods: {
     addNewTodo: function () {
+      if (!this.newTodoText) {
+        return
+      }
       this.todos.push({
         id: this.nextTodoId++,
         title: this.newTodoText,
