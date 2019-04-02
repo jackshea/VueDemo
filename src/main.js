@@ -53,31 +53,31 @@ new Vue({
         title: this.newTodoText
       })
       this.newTodoText = ''
-    }
+    },
   }
 })
 
-new Vue({
+var itemlistApp = new Vue({
   el: '#todo-list',
   data: {
-    nextTodoId: 2,
+    nextTodoId: 4,
     newTodoText: '',
     itemDoneStyle: {
       'text-decoration-line': 'line-through',
     },
     todos: [
       {
-        id: 1,
+        id: 0,
         title: '起床',
         isDone: true,
       },
       {
-        id: 2,
+        id: 1,
         title: '吃饭',
         isDone: false,
       },
       {
-        id: 3,
+        id: 2,
         title: '上班',
         isDone: false,
       },
@@ -91,6 +91,17 @@ new Vue({
         isDone: false,
       })
       this.newTodoText = ''
-    }
+    },
+    removeTodoItem: function (index) {
+      this.todos.splice(index, 1)
+    },
+    removeAllDoneItems: function () {
+      for (let i = 0; i < this.todos.length; i++) {
+        if (this.todos[i].isDone) {
+          this.todos.splice(i, 1)
+          i--
+        }
+      }
+    },
   }
 })
