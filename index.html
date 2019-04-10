@@ -1,28 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html>
 <head>
   <meta charset="utf-8">
-  <!--<meta name="viewport" content="width=device-width,initial-scale=1.0">-->
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <script src="/src/main.js"></script>
-  <script src="/src/todo.js"></script>
   <title>待办事项</title>
 </head>
 <body>
-<div id="todo-list">
-  <div v-for="(item, index) in todos" :key="item.id" v-on:remove="todos.splice(index,1)">
-    <label :style="item.isDone?itemDoneStyle:null">
-      <input type="checkbox" v-model="item.isDone" :disabled="item.isDone">
-      {{item.title}}
-    </label>
-    <button v-if="!item.isDone" v-on:click="removeTodoItem(index)">删除</button>
-  </div>
-  <div><input type="text" placeholder="待办事项" v-model="newTodoText" @keydown.enter="addNewTodo">
-    <button @click="addNewTodo">添加</button>
-  </div>
-  <div>
-    <button @click="removeAllDoneItems">删除全部已完成项</button>
-  </div>
+<div id="app">
 </div>
-
+<!-- built files will be auto injected -->
 </body>
 </html>
+
