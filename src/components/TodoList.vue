@@ -5,9 +5,9 @@
         <Button type="primary" @click="removeAllDoneItems">删除全部已完成项</button>
       </div>
       <Card v-for="(item, index) in todos" :key="item.id" @remove="todos.splice(index,1)">
-          <Checkbox class="todo-item-lab" v-model="item.isDone" :disabled="item.isDone" :style="item.isDone?itemDoneStyle:null">
-            {{item.title}}
-          </Checkbox>
+        <Checkbox class="todo-item-lab" :class="doneItemClassName(index)" v-model="item.isDone" :disabled="item.isDone">
+          {{item.title}}
+        </Checkbox>
         <div slot="extra">
           <Button type="primary" v-if="!item.isDone" @click="removeTodoItem(index)">删除</Button>
         </div>
@@ -16,7 +16,8 @@
         <div slot="extra">
           <Button type="primary" @click="addNewTodo">添加</button>
         </div>
-        <Input type="text" placeholder="待办事项" v-model="newTodoText" style="width: 200px;" @on-enter="addNewTodo" clearable icon="ios-create-outline" />
+        <Input type="text" class="todo-input" placeholder="待办事项" v-model="newTodoText" @on-enter="addNewTodo"
+               clearable icon="ios-create-outline"/>
       </Card>
     </Card>
   </div>
@@ -29,9 +30,6 @@
       return {
         nextTodoId: 4,
         newTodoText: '',
-        itemDoneStyle: {
-          'text-decoration-line': 'line-through',
-        },
         todos: [
           {
             id: 0,
@@ -74,6 +72,9 @@
           }
         }
       },
+      doneItemClassName: function (index) {
+        return this.todos[index].isDone ? 'done-item' : '';
+      }
     }
   };
 </script>
@@ -83,4 +84,13 @@
     width: 200px;
     word-wrap: break-word;
   }
+
+  .done-item {
+    text-decoration-line: line-through
+  }
+
+  .todo-input {
+    width: 200px;
+  }
+
 </style>
