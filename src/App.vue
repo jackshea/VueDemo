@@ -1,14 +1,8 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <todo-list></todo-list>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'App'
-}
-</script>
 
 <style>
 #app {
@@ -20,3 +14,9 @@ export default {
   margin-top: 60px;
 }
 </style>
+<script>
+  import TodoList from '@/components/TodoList';
+  export default {
+    components: {TodoList}
+  };
+</script>

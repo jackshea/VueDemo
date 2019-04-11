@@ -1,47 +1,55 @@
 <template>
-  <div id="todo-list">
-    <div v-for="(item, index) in todos" :key="item.id" v-on:remove="todos.splice(index,1)">
-      <label :style="item.isDone?itemDoneStyle:null">
-        <input type="checkbox" v-model="item.isDone" :disabled="item.isDone">
-        {{item.title}}
-      </label>
-      <button v-if="!item.isDone" v-on:click="removeTodoItem(index)">删除</button>
-    </div>
-    <div><input type="text" placeholder="待办事项" v-model="newTodoText" @keydown.enter="addNewTodo">
-      <button @click="addNewTodo">添加</button>
-    </div>
-    <div>
-      <button @click="removeAllDoneItems">删除全部已完成项</button>
-    </div>
+  <div id="todo-list" align="left">
+    <Card title="待办事项列表" style="width:350px">
+      <div slot="extra">
+        <Button type="primary" @click="removeAllDoneItems">删除全部已完成项</button>
+      </div>
+      <Card v-for="(item, index) in todos" :key="item.id" @remove="todos.splice(index,1)">
+          <Checkbox class="todo-item-lab" v-model="item.isDone" :disabled="item.isDone" :style="item.isDone?itemDoneStyle:null">
+            {{item.title}}
+          </Checkbox>
+        <div slot="extra">
+          <Button type="primary" v-if="!item.isDone" @click="removeTodoItem(index)">删除</Button>
+        </div>
+      </Card>
+      <Card>
+        <div slot="extra">
+          <Button type="primary" @click="addNewTodo">添加</button>
+        </div>
+        <Input type="text" placeholder="待办事项" v-model="newTodoText" style="width: 200px;" @on-enter="addNewTodo" clearable icon="ios-create-outline" />
+      </Card>
+    </Card>
   </div>
 </template>
 
 <script>
   export default {
     name: 'TodoList',
-    data: {
-      nextTodoId: 4,
-      newTodoText: '',
-      itemDoneStyle: {
-        'text-decoration-line': 'line-through',
-      },
-      todos: [
-        {
-          id: 0,
-          title: '起床',
-          isDone: true,
+    data () {
+      return {
+        nextTodoId: 4,
+        newTodoText: '',
+        itemDoneStyle: {
+          'text-decoration-line': 'line-through',
         },
-        {
-          id: 1,
-          title: '吃饭',
-          isDone: false,
-        },
-        {
-          id: 2,
-          title: '上班',
-          isDone: false,
-        },
-      ]
+        todos: [
+          {
+            id: 0,
+            title: '起床',
+            isDone: true,
+          },
+          {
+            id: 1,
+            title: '吃饭',
+            isDone: false,
+          },
+          {
+            id: 2,
+            title: '上班',
+            isDone: false,
+          },
+        ]
+      };
     },
     methods: {
       addNewTodo: function () {
@@ -71,5 +79,8 @@
 </script>
 
 <style scoped>
-
+  .todo-item-lab {
+    width: 200px;
+    word-wrap: break-word;
+  }
 </style>

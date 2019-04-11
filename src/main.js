@@ -1,21 +1,17 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import App from 'App.vue';
-import Routers from './router';
+import Vue from 'vue'
+import App from './App'
+import router from './router'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 
-Vue.use(VueRouter);
 Vue.use(iView);
 
-// The routing configuration
-const RouterConfig = {
-  routes: Routers
-};
-const router = new VueRouter(RouterConfig);
+Vue.config.productionTip = false
 
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router: router,
-  render: h => h(App)
-});
+  router,
+  components: { App },
+  template: '<App/>'
+})
